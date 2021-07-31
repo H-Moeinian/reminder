@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container mt-3 border border-3 border-dark p-3">
+    {% load task_extras %}
+
+    <p><strong>Title:</strong> {{ task.title|make_title }} </p> <!-- author detail link not yet defined -->
+    <p><strong>Description:</strong> {{ task.description }}</p>
+    <p><strong>Category:</strong>
+    <ul>
+        {% for category in task.category.all %}
+            <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+        {% empty %}
+            <p>This task has no category!</p>
+        {% endfor %}
+    </ul>
+    </p>
+    <p><strong>Priority:</strong> {{ priority|get_item:task.priority }}</p>
+    <p><strong>Due Time:</strong> {{ task.set_to_time }}</p>
+    <p><strong>Remained Time:</strong> {% my_tag task.set_to_time %}</p>
+    <p><strong>Done:</strong> {{ task.done|task_done }}</p>
+        <strong><a href="{% url 'task_update' task.pk %}">Click here to edit task</a></strong> |
+        <strong><a href="{% url 'task_delete' task.pk %}">Click here to delete task</a></strong>
+    </div>
+{% endblock %}

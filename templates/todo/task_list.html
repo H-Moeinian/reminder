@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container mt-3 border border-3 border-dark p-3">
+        <ul>
+            {% if expired_tasks and expired_tasks_count %}
+                <h3 class="pb-3">The due date of these tasks has passed:</h3>
+            {% endif %}
+            {% for object in object_list %}
+                <li><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></li><br/>
+            {% empty %}
+                {% if from_category %}
+                    <p>You have not created any tasks in this category yet!</p>
+                {% elif expired_tasks %}
+                    <p>No tasks expired yet!</p>
+                {% else %}
+                    <p>You have not created any tasks yet!</p>
+                {% endif %}
+            {% endfor %}
+
+        </ul>
+    {% if tasks_count or expired_tasks_count or from_category_count %}
+    <form method="post">
+    {% csrf_token %}
+    <button type="submit">download tasks</button>
+    </form>
+    {% endif %}
+    </div>
+
+{% endblock %}

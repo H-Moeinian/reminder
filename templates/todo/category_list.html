@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container mt-3 border border-3 border-dark p-3">
+    <ul>
+        {% for category in object_list %}
+            <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li><br/>
+        {% empty %}
+            <p>You have not created any categories yet!</p>
+        {% endfor %}
+    </ul>
+    {% if empty_category %}
+        <h2>Categories with no tasks:</h2>
+        <br>
+        <ul>
+            {% for category in empty_category %}
+                <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li><br/>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    </div>
+{% endblock %}

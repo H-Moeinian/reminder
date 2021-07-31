@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container mt-3 border border-3 border-dark p-3">
+        <h1 class="mb-3">ToDo Application</h1>
+        <ul>
+            <li>
+                <h3><a href="{% url 'admin:index' %}">Admin</a></h3>
+            </li>
+            <br>
+            <li>
+                <h3><a href="{% url 'tasks_list' %}">Tasks</a></h3>
+            </li>
+            <br>
+            <li>
+                <h3><a href="{% url 'categories_list' %}">Categories</a></h3>
+            </li>
+            <br>
+            <li>
+                <h3><a href="{% url 'add_task' %}">Add new task</a></h3>
+            </li>
+            <br>
+            <li>
+                <h3><a href="{% url 'add_category' %}">Add new category</a></h3>
+            </li>
+            <br>
+            <li>
+                <h3><a href="{% url 'expired_tasks' %}">Expired tasks</a></h3>
+            </li>
+            <br>
+        </ul>
+
+    </div>
+{% endblock %}
